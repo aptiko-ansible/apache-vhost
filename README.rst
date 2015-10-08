@@ -5,9 +5,9 @@ apache-vhost
 Overview
 ========
 
-This is an Ansible role for configuring apache sites. It also configures
-awstats. It depends on `apache`, which must also be listed as a role for
-the server. Use `apache-vhost` like this::
+This is an Ansible role for configuring apache sites on Debian. It also
+configures awstats. It depends on `apache`, which must also be listed as
+a role for the server. Use `apache-vhost` like this::
 
   - role: apache-vhost
     server_name: example.org
