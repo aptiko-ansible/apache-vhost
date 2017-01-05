@@ -29,6 +29,8 @@ Variables
   testing, for example when it's not yet possible to transfer the main
   domain to a new server and an alternative domain needs to be used
   while the new server is being setup).
+- ``document_root``: The document root. The default is ``/var/www/{{
+  server_name }}``.
 - ``extras``: A string with extra configuration to be added to the
   configuration file.
 - ``nonssl_extras``: Like ``extras``, but this is configuration that
