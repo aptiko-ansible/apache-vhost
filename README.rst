@@ -48,6 +48,10 @@ Variables
 - ``cert``: The SSL certificate (see also ``letsencrypt``).
 - ``private_key``: The SSL private key.
 - ``chain_certificates``:   A list of SSL chain certificates.
+- ``force_ssl``: Can be "true" or "false" (the default). If "true",
+  visiting the non-ssl version will redirect to the ssl version. If
+  ``force_ssl`` is "true", ``cert`` or ``letsencrypt`` must be
+  specified.
 - ``awstats_allow_from``: IPs or subnets from which access to awstats is going
   to be allowed, in addition to the localhost. By default this is empty.
 
