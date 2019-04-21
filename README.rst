@@ -38,13 +38,16 @@ Variables
 - ``ssl_extras``: Like ``extras``, but this is configuration that will
   only be used for SSL (``extras`` is also used for SSL). Ignored if
   ``cert`` is unset.
-- ``letsencrypt``: Can be "true" or "false" (the default). If "true",
-  the certificates are taken from directory ``/etc/letsencrypt``. This
-  module does not place the certificates there and does not create them;
-  it expects to find them. Create the certificates separately by running
-  ``certbot --apache certonly``. If ``letsencrypt=true``, ``cert``,
-  ``private_key`` and ``chain_certificates`` should not be specified. If
-  neither ``letsencrypt`` nor ``cert`` is specified, there's no SSL.
+- ``letsencrypt``: Can be "true" or "false" (the default) or a string.
+  If "true" or a string, the certificates are taken from directory
+  ``/etc/letsencrypt``. This module does not place the certificates
+  there and does not create them; it expects to find them. If it's
+  "true", it uses the certificate named after the ``server_name``; if
+  it's a string, it uses that string. Create the certificates separately
+  by running ``certbot --apache certonly``. If ``letsencrypt`` is "true"
+  or a string, ``cert``, ``private_key`` and ``chain_certificates``
+  should not be specified. If neither ``letsencrypt`` nor ``cert`` is
+  specified, there's no SSL.
 - ``cert``: The SSL certificate (see also ``letsencrypt``).
 - ``private_key``: The SSL private key.
 - ``chain_certificates``:   A list of SSL chain certificates.
