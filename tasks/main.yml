@@ -27,7 +27,7 @@
   copy:
     content: '{{ cert }}{{ chain_certificates|default("")|join("") }}'
     dest: /etc/apache2/certs/{{ server_name }}.chained.ssl.crt
-  when: cert is defined
+  when: cert is defined and cert
   notify:
   - Restart apache
 
@@ -36,7 +36,7 @@
     content: "{{ private_key }}"
     dest: /etc/ssl/private/{{ server_name }}.ssl.key
     mode: 640
-  when: private_key is defined
+  when: private_key is defined and private_key
   notify:
   - Restart apache
 
