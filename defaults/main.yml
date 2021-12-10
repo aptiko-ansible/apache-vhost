@@ -1,3 +1,4 @@
 ---
 letsencrypt: false
 force_ssl: false
+use_awstats: true

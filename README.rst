@@ -6,8 +6,8 @@ Overview
 ========
 
 This is an Ansible role for configuring apache sites on Debian. It also
-configures awstats. It depends on `apache`, which must also be listed as
-a role for the server. Use `apache-vhost` like this::
+optionally configures awstats. It depends on `apache`, which must also be
+listed as a role for the server. Use `apache-vhost` like this::
 
   - role: apache-vhost
     server_name: example.org
@@ -55,6 +55,8 @@ Variables
   visiting the non-ssl version will redirect to the ssl version. If
   ``force_ssl`` is "true", ``cert`` or ``letsencrypt`` must be
   specified.
+- ``use_awstats``: If "true", it also configures awstats. The default is
+  "true" for backwards compatibility reasons.
 - ``awstats_allow_from``: IPs or subnets from which access to awstats is going
   to be allowed, in addition to the localhost. By default this is empty.
 
@@ -63,9 +65,10 @@ Meta
 
 Written by Antonis Christofides
 
+| Copyright (C) 2021 GRNET
 | Copyright (C) 2011-2015 Antonis Christofides
-| Copyright (C) 2014 TEI of Epirus
-| Copyright (C) 2015 National Technical University of Athens
+| Copyright (C) 2014-2021 TEI of Epirus
+| Copyright (C) 2015-2021 National Technical University of Athens
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

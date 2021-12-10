@@ -44,6 +44,7 @@
 
 - name: Setup awstats
   template: src=awstats.site.conf dest=/etc/awstats/awstats.{{ server_name }}.conf
+  when: use_awstats
 
 - name: Create awstats directory for {{ server_name }}
   file:
@@ -52,3 +53,4 @@
     owner: www-data
     group: www-data
     mode: 0750
+  when: use_awstats
