@@ -3,11 +3,13 @@
 # Site setup
 
 - name: Configuration file for {{ server_name }}
+  become: yes
   template: src=site.conf dest=/etc/apache2/sites-available/{{ server_name }}.conf
   notify:
   - Restart apache
 
 - name: Enable site {{ server_name }}
+  become: yes
   file:
     state: link
     src: /etc/apache2/sites-available/{{ server_name }}.conf
@@ -16,14 +18,17 @@
   - Restart apache
 
 - name: Create snippets directory for {{ server_name }}
+  become: yes
   file: name=/etc/apache2/snippets/{{ server_name }} state=directory
 
 - name: Create directory /var/www/{{ server_name }}
+  become: yes
   file: state=directory dest=/var/www/{{ server_name }}
 
 # SSL
 
 - name: Install SSL certificate
+  become: yes
   copy:
     content: '{{ cert }}{{ chain_certificates|default("")|join("") }}'
     dest: /etc/apache2/certs/{{ server_name }}.chained.ssl.crt
@@ -32,6 +37,7 @@
   - Restart apache
 
 - name: Install SSL private key
+  become: yes
   copy: 
     content: "{{ private_key }}"
     dest: /etc/ssl/private/{{ server_name }}.ssl.key
@@ -43,10 +49,12 @@
 # Awstats
 
 - name: Setup awstats
+  become: yes
   template: src=awstats.site.conf dest=/etc/awstats/awstats.{{ server_name }}.conf
   when: use_awstats
 
 - name: Create awstats directory for {{ server_name }}
+  become: yes
   file:
     state: directory
     dest: /var/lib/awstats/{{ server_name }}
