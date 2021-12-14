@@ -51,7 +51,7 @@
 - name: Setup awstats
   become: yes
   template: src=awstats.site.conf dest=/etc/awstats/awstats.{{ server_name }}.conf
-  when: use_awstats
+  when: use_awstats | default(True)
 
 - name: Create awstats directory for {{ server_name }}
   become: yes
@@ -61,4 +61,4 @@
     owner: www-data
     group: www-data
     mode: 0750
-  when: use_awstats
+  when: use_awstats | default(True)
