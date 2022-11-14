@@ -1,5 +1,19 @@
 ---
 
+# Let's Encrypt
+
+- name: Check if letsencrypt certificate exists
+  stat:
+    path: /etc/letsencrypt/live/{{ server_name }}
+  register: letsencryptdir
+
+- name: Ensure ferm allows certbot
+  meta: flush_handlers
+
+- name: Install letsencrypt certificate
+  command: certbot certonly --apache --non-interactive --agree-tos -m {{ letsencrypt_admin }} -d {% if letsencrypt is sameas true %}{{ server_name }}{% else %}{{ letsencrypt }}{% endif %}
+  when: letsencrypt and not letsencryptdir.stat.exists
+
 # Site setup
 
 - name: Configuration file for {{ server_name }}
@@ -21,7 +35,7 @@
 - name: Create directory /var/www/{{ server_name }}
   file: state=directory dest=/var/www/{{ server_name }}
 
-# SSL
+# SSL other than Let's Encrypt
 
 - name: Install SSL certificate
   copy:

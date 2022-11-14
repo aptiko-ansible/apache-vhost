@@ -39,15 +39,14 @@ Variables
   only be used for SSL (``extras`` is also used for SSL). Ignored if
   ``cert`` is unset.
 - ``letsencrypt``: Can be "true" or "false" (the default) or a string.
-  If "true" or a string, the certificates are taken from directory
-  ``/etc/letsencrypt``. This module does not place the certificates
-  there and does not create them; it expects to find them. If it's
-  "true", it uses the certificate named after the ``server_name``; if
-  it's a string, it uses that string. Create the certificates separately
-  by running ``certbot --apache certonly``. If ``letsencrypt`` is "true"
-  or a string, ``cert``, ``private_key`` and ``chain_certificates``
-  should not be specified. If neither ``letsencrypt`` nor ``cert`` is
-  specified, there's no SSL.
+  The usual value for Let's Encrypt certificates is "true", in which
+  case the Let's Encrypt certificates for ``server_name`` are used; if
+  they don't exist in ``/etc/letsencrypt``, they are created with
+  ``certbot``. If a string is used, it's the same thing, except that the
+  string is used as the server name instead of ``server_name``.  If
+  ``letsencrypt`` is "true" or a string, ``cert``, ``private_key`` and
+  ``chain_certificates`` should not be specified. If neither
+  ``letsencrypt`` nor ``cert`` is specified, there's no SSL.
 - ``cert``: The SSL certificate (see also ``letsencrypt``).
 - ``private_key``: The SSL private key.
 - ``chain_certificates``:   A list of SSL chain certificates.
@@ -65,6 +64,7 @@ Meta
 
 Written by Antonis Christofides
 
+| Copyright (C) 2022 IRMASYS
 | Copyright (C) 2021 GRNET
 | Copyright (C) 2011-2015 Antonis Christofides
 | Copyright (C) 2014-2021 TEI of Epirus
